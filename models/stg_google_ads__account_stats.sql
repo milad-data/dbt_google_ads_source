@@ -9,12 +9,7 @@ with base as (
 fields as (
 
     select
-        {{
-            fivetran_utils.fill_staging_columns(
-                source_columns=adapter.get_columns_in_relation(ref('stg_google_ads__account_stats_tmp')),
-                staging_columns=get_account_stats_columns()
-            )
-        }}
+        *
     
         {{ fivetran_utils.source_relation(
             union_schema_variable='google_ads_union_schemas', 
@@ -34,7 +29,8 @@ final as (
         device,
         clicks, 
         cost_micros / 1000000.0 as spend, 
-        impressions
+        impressions,
+        conversions
         
         {{ fivetran_utils.fill_pass_through_columns('google_ads__account_stats_passthrough_metrics') }}
 
