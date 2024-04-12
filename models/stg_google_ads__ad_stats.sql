@@ -10,7 +10,9 @@ with base as (
 fields as (
 
     select
-        *        
+        *,
+        cast(null as string) as ad_group,
+        cast(null as string) as keyword_ad_group_criterion        
     
         {{ fivetran_utils.source_relation(
             union_schema_variable='google_ads_union_schemas', 
